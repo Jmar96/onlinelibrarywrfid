@@ -1,0 +1,14 @@
+0005106405 jaymar
+0005106406 recelle
+0005106407 member
+0005134640 paul	
+0005188108 rita
+
+
+SELECT b.*,c.catTitle FROM books AS b LEFT JOIN bcategories as c ON b.category = "Technology" ORDER BY b.bookName;
+
+SELECT b.*,c.catTitle FROM books AS b LEFT JOIN bcategories as c ON b.category = "Technology" GROUP BY c.catTitle ORDER BY b.bookName;
+
+SELECT b.*,c.catTitle FROM books AS b LEFT JOIN bcategories as c ON b.category = "Technology" ORDER BY b.bookName LIMIT 1;
+
+SELECT b.*,c.catTitle FROM books AS b LEFT JOIN bcategories as c ON b.category = c.catTitle WHERE c.catTitle = "Technology" ORDER BY b.bookName;

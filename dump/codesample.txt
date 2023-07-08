@@ -1,0 +1,103 @@
+$verify = mysql_query("SELECT * FROM member WHERE memberId = '$memberId' ");
+	$rresult = mysql_query ($connect,$verify);
+	while ($row = mysql_fetch_array ($rresult)){
+		echo $row['memberId'];
+		echo $row['fullname'];
+	}
+	//$vmId = $row['memberId'];
+	//$dStatus = "deactive";
+	//$aStatus = "active";
+	//$noMem = "new";
+	//echo "<br>".$aStatus;
+	//echo "<br>".$dStatus;
+	//echo "<br>".$noMem;
+	//if ($row['memberId'] == $row['memberId']){
+	//	echo "<br>true";
+	//}else if($dStatus == $aStatus){
+	//	echo $aStatus;
+	//}else{
+	//	echo "false";
+	//}
+
+INSERT INTO member VALUES ('','emberId','ssword','oMem','','','ailAddress','active','trieve','');
+
+if ($memberId==''||$password==''||$cpassword==''||$emailAddress==''||$retrieve==''){
+		$_SESSION['register']=FALSE;
+		$_SESSION['memId']=$memberId;
+		$_SESSION['passw']=$password;
+		$_SESSION['cpassw']=$cpassword;
+		$_SESSION['emadd']=$emailAddress;
+		$_SESSION['ret']=$retrieve;
+		echo "<center>You must fill in all the fields.</center>";
+		echo "<a href="olsregistration.php">BACK</a>";
+	}else if ()
+
+	if ($memberId==''||$password==''||$cpassword==''||$emailAddress==''||$retrieve==''){
+		$_SESSION['register']=FALSE;
+		$_SESSION['memId']=$memberId;
+		$_SESSION['passw']=$password;
+		$_SESSION['cpassw']=$cpassword;
+		$_SESSION['emadd']=$emailAddress;
+		$_SESSION['ret']=$retrieve;
+		echo "<center>You must fill in all the fields.</center>";
+		echo "<a href="olsregistration.php">BACK</a>";
+	}else if ($password!=$cpassword){
+		$_SESSION['register']=FALSE;
+		$_SESSION['memId']=$memberId;
+		$_SESSION['passw']=$password;
+		$_SESSION['cpassw']=$cpassword;
+		$_SESSION['emadd']=$emailAddress;
+		$_SESSION['ret']=$retrieve;
+		echo "<center>Please verify your password.</center>";
+		echo "<a href="olsregistration.php">BACK</a>";
+	}else if (strlen($password)<=5){
+		$_SESSION['register']=FALSE;
+		$_SESSION['memId']=$memberId;
+		$_SESSION['passw']=$password;
+		$_SESSION['cpassw']=$cpassword;
+		$_SESSION['emadd']=$emailAddress;
+		$_SESSION['ret']=$retrieve;
+		echo "<center>Password must be atleast 6 characters.</center>";
+		echo "<a href="olsregistration.php">BACK</a>";
+	}else if ($memberId!=$row['memberId']){
+		$insert=mysql_query("INSERT INTO member ('id','memberId','password','fullname','emailAddress','userStatus','retrieve') VALUES ('null','$memberId','$password','$noMem','$emailAddress','$dStatus','$retrieve')");
+		if($insert){
+			echo '<center>';
+			echo "<h1>Register Successfully</h1><br><br>";
+			echo "<h4>You are not an student or member of school faculty.</h4><br>";
+			echo "<h4>Wait the admin to activate your account after verification.</h4><br>";
+			echo "<script language='javascript'>alert('Register Succesfully')</script>";
+			$nmSearch = mysql_query("SELECT * FROM member WHERE memberId = '$memberId' ");
+			while($row = mysql_fetch_array($nmSearch)){
+			echo "<table align="center" border="2">
+				<tr><th>MEMBER ID</th><th>EMAIL ADDRESS</th><th>STATUS</th></tr>
+				<tr><td>".$row['memberId'];."</td><td>".$row['emailAddress'];."</td><td>".$row['userStatus'];."</td></tr>";
+			echo "<br>...";
+			echo "</table>";
+			echo '</center>';
+			}
+		}else{
+			echo "error!";
+			echo "<a href="olsregistration.php">BACK</a>";
+			header("refresh:2,index.php");
+		}
+	}else if ($memberId==$row['memberId']){
+		$update=mysql_query("UPDATE member SET password='$password',emailAddress='$emailAddress',retrieve='$retrieve',userStatus='$aStatus' WHERE memberId='$memberId'");
+		if($update){
+			echo '<center>';
+			echo "<h1>Register Successfully</h1><br><br>";
+			echo "<h4>You can now login.</h4><br>";
+			echo "<script language='javascript'>alert('Register Succesfully')</script>";
+			header("refresh:2,index.php");
+		}else{
+			echo "error!";
+			echo "<a href="olsregistration.php">BACK</a>";
+			header("refresh:2,index.php");
+		}
+	}else{
+		echo "<center>";
+		echo "<h2>Warning!</h2>";
+		echo "<h2>Your data that you've enter are suspecious!..</h2>";
+		echo "</center>";
+		header("refresh:2,index.php");
+	}

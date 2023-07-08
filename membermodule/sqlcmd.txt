@@ -1,0 +1,18 @@
+SELECT r.*, b.bookStatus FROM reservation AS r 
+		LEFT JOIN books AS b ON b.isbn = r.bookId 
+		WHERE r.dateReserve < (NOW() - INTERVAL 3 HOUR)
+
+SELECT DISTINCT (bookName) FROM `books` WHERE bookStatus="available"
+UNION
+SELECT DISTINCT (bookPic) FROM `books` WHERE bookStatus="available"
+
+SELECT * 
+FROM books
+WHERE bookStatus =  "available"
+UNION 
+SELECT * 
+FROM books
+WHERE isbn LIKE  '%{654654}%' || bookName LIKE  '%{654654}%'
+ORDER BY id DESC 
+LIMIT 0 , 30
+
